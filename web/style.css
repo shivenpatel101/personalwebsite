@@ -68,13 +68,14 @@ a:hover { color: var(--muted); }
 }
 .entries .title a:hover { color: var(--muted); }
 .entries .desc { color: var(--muted); font-size: .95rem; margin-top: .15rem; }
-/* Force Work project links to stay black */
+/* Only project names are blue */
+#work .entries .title,
 #work .entries .title a,
 #work .entries .title a:visited {
-  color: var(--ink) !important;
+  color: var(--accent) !important;
 }
 #work .entries .title a:hover {
-  color: var(--muted) !important;
+  color: var(--accent-hover) !important;
 }
 
 .timeline { list-style: none; padding: 0; margin: 0; }
@@ -98,7 +99,7 @@ a:hover { color: var(--muted); }
   white-space: nowrap;
 }
 .timeline-content {
-  border-left: 2px solid var(--accent);
+  border-left: 2px solid var(--border);
   padding-left: 1rem;
 }
 .timeline-content .title a {
@@ -133,11 +134,11 @@ a:hover { color: var(--muted); }
   margin-top: .5rem;
 }
 .contact-icons a {
-  color: var(--accent);
+  color: var(--ink);
   display: inline-flex;
   text-decoration: none;
 }
-.contact-icons a:hover { color: var(--accent-hover); }
+.contact-icons a:hover { color: var(--muted); }
 .contact-icons svg { width: 1.2rem; height: 1.2rem; display: block; }
 
 @font-face {
@@ -182,7 +183,7 @@ a:hover { color: var(--muted); }
   text-decoration: none; opacity: 0;
   transition: opacity .5s ease, transform .85s cubic-bezier(.22,.61,.36,1);
 }
-#logo .last { color: var(--accent); }
+#logo .last { color: var(--muted); }
 #logo.show { opacity: 1; }
 #logo.corner {
   left: 1.5rem; top: 1rem;
