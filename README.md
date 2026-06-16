@@ -39,9 +39,11 @@ redeploys automatically.
 
 One-time setup in GitHub:
 
-1. Open https://github.com/shivenpatel101/personalwebsite/settings/pages
-2. Under **Build and deployment → Source**, choose **GitHub Actions**
-3. Go to **Actions** → **Deploy site to GitHub Pages** → **Run workflow**
+1. Go to **Actions** → **Deploy site to GitHub Pages** → **Run workflow**
+   (this creates the `gh-pages` branch from `web/`)
+2. Open https://github.com/shivenpatel101/personalwebsite/settings/pages
+3. Under **Build and deployment → Source**, choose **Deploy from a branch**
+4. Set **Branch** to `gh-pages` and **Folder** to `/ (root)`, then **Save**
 
 After the workflow finishes (about 1 minute), the site is live at:
 

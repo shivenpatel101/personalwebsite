@@ -1,8 +1,8 @@
 name: Deploy site to GitHub Pages
 
-# Deploys the static site in web/ on every push to the default branch.
-# The intro plays on every visit (client-side), so no build step is needed here —
-# the rendered video lives in web/assets/ and is committed to the repo.
+# Copies web/ to the gh-pages branch on every push to main.
+# In repo Settings → Pages, set Source to "Deploy from a branch":
+#   branch: gh-pages, folder: / (root)
 
 on:
   push:
@@ -10,11 +10,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
-# Allow one concurrent deployment; newer pushes cancel in-progress runs.
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -22,21 +19,13 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload site (web/)
-        uses: actions/upload-pages-artifact@v3
+      - name: Publish web/ to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: web
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          folder: web
+          branch: gh-pages
+          single-commit: true
