@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shiven Patel</title>
+<link rel="icon" href="data:,">
+
+<!-- Preload the intro video so it's ready before first paint -->
+<link rel="preload" as="video" href="assets/intro.mp4" type="video/mp4">
+
+<style>
+  :root {
+    --ink: #141414;
+    --gray: #8A8A8A;
+    --line: #e3ecf2;
+    --accent: #3A8FB5;        /* epicycle blue */
+    --accent-deep: #2b6f90;
+    --accent-soft: #eaf3f8;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background:
+      radial-gradient(1100px 620px at 50% -10%, rgba(58,143,181,0.14), rgba(58,143,181,0) 70%),
+      radial-gradient(900px 500px at 100% 110%, rgba(58,143,181,0.10), rgba(58,143,181,0) 70%),
+      #ffffff;
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @font-face {
+    font-family: "Script";
+    src: url("assets/GreatVibes-Regular.ttf") format("truetype");
+    font-display: swap;
+  }
+
+  /* ---------- Intro overlay ---------- */
+  #intro {
+    position: fixed; inset: 0; z-index: 100; background: #fff;
+    display: grid; place-items: center;
+    transition: opacity .6s ease;
+  }
+  #intro.hidden { opacity: 0; pointer-events: none; }
+  #introVid { max-width: 100%; max-height: 100%; display: block; }
+
+  /* ---------- Brand wordmark (docks to corner) ---------- */
+  #logo {
+    position: fixed; left: 50%; top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: left top;
+    z-index: 110;
+    font-family: "Script", cursive; color: var(--ink);
+    font-size: clamp(2.5rem, 9vw, 7rem); line-height: 1; white-space: nowrap;
+    text-decoration: none; opacity: 0;
+    transition: opacity .5s ease, transform .85s cubic-bezier(.22,.61,.36,1);
+  }
+  #logo .last { color: var(--gray); }
+  #logo.show { opacity: 1; }
+  #logo.corner {
+    left: 1.5rem; top: 1.0rem;
+    transform: translate(0, 0) scale(.30);
+  }
+
+  /* ---------- Page ---------- */
+  #page { opacity: 0; transition: opacity .7s ease .15s; }
+  #page.show { opacity: 1; }
+
+  /* thin blue accent line across the very top */
+  body::before {
+    content: ""; position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 120;
+    background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+  }
+
+  header {
+    position: fixed; top: 0; right: 0; left: 0; z-index: 90;
+    display: flex; justify-content: flex-end; align-items: center;
+    gap: 1.75rem; padding: 1.5rem 2rem;
+  }
+  nav a {
+    color: var(--ink); text-decoration: none; font-size: .95rem; letter-spacing: .02em;
+    opacity: .7; transition: color .2s, opacity .2s;
+  }
+  nav a:hover { opacity: 1; color: var(--accent); }
+
+  main {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    max-width: 820px; margin: 0 auto; padding: 0 2rem;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 600; letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+  }
+  .hero h1 .name {
+    color: var(--accent);
+    background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--gray);
+    line-height: 1.6; margin: 0 0 2rem; max-width: 40ch;
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .links a {
+    color: var(--accent-deep); text-decoration: none; font-size: .98rem; font-weight: 500;
+    padding: .6rem 1.15rem; border: 1px solid var(--accent); border-radius: 999px;
+    background: var(--accent-soft);
+    transition: background .2s, color .2s, transform .15s, box-shadow .2s;
+  }
+  .links a:hover {
+    background: var(--accent); color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(58,143,181,0.30);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #intro { display: none; }
+    #logo { opacity: 1; left: 1.5rem; top: 1rem; transform: scale(.30); transition: none; }
+    #page { opacity: 1; transition: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- Intro overlay (plays, then fades and hands off to the corner wordmark) -->
+  <div id="intro">
+    <video id="introVid" autoplay muted playsinline preload="auto"
+           poster="assets/intro-poster.png">
+      <source src="assets/intro.webm" type="video/webm">
+      <source src="assets/intro.mp4"  type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Persistent brand wordmark; links home -->
+  <a id="logo" href="/">Shiven <span class="last">Patel</span></a>
+
+  <!-- The real homepage, revealed after the intro -->
+  <div id="page">
+    <header>
+      <nav>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <!-- TODO: replace with your email -->
+        <a href="mailto:you@example.com">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Hi, I'm <span class="name">Shiven</span>.</h1>
+        <p>Short tagline goes here — what you build, study, or care about.</p>
+        <div class="links">
+          <!-- TODO: replace these with your real links -->
+          <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:you@example.com">Email</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // How often the intro plays:
+    //   "always"  -> every page load (current setting)
+    //   "session" -> once per browser tab/session
+    //   "daily"   -> once per 24h
+    const PLAY_FREQUENCY = "always";
+
+    const intro = document.getElementById("intro");
+    const vid = document.getElementById("introVid");
+    const logo = document.getElementById("logo");
+    const page = document.getElementById("page");
+
+    function dockAndReveal() {
+      logo.classList.add("show");
+      requestAnimationFrame(() => logo.classList.add("corner"));
+      page.classList.add("show");
+    }
+
+    function finish() {
+      intro.classList.add("hidden");
+      dockAndReveal();
+    }
+
+    function shouldPlay() {
+      if (PLAY_FREQUENCY === "always") return true;
+      if (PLAY_FREQUENCY === "session") return !sessionStorage.getItem("introPlayed");
+      if (PLAY_FREQUENCY === "daily") {
+        const last = Number(localStorage.getItem("introPlayedAt") || 0);
+        return Date.now() - last > 24 * 60 * 60 * 1000;
+      }
+      return true;
+    }
+
+    function markPlayed() {
+      if (PLAY_FREQUENCY === "session") sessionStorage.setItem("introPlayed", "1");
+      if (PLAY_FREQUENCY === "daily") localStorage.setItem("introPlayedAt", String(Date.now()));
+    }
+
+    if (!shouldPlay()) {
+      intro.remove();
+      logo.classList.add("show", "corner");
+      page.classList.add("show");
+    } else {
+      vid.addEventListener("ended", finish);
+      // Safety: if the video stalls or 'ended' never fires, hand off anyway.
+      vid.addEventListener("error", finish);
+      vid.play().catch(() => finish()); // autoplay blocked -> reveal page immediately
+      markPlayed();
+    }
+  </script>
+</body>
+</html>

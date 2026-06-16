@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Manim render output
+media/
+
+# Caches (fontconfig cache gets created during Docker renders)
+.cache/
+.fontconfig/
+
+# Intermediate optimized artifacts (regenerate with `make`)
+/intro.mp4
+/intro.webm
+/intro-poster.png
+/FullName_FFTReveal.mp4
+
+# NOTE: web/assets/intro.* and the poster ARE committed on purpose —
+# GitHub Pages serves them directly. Regenerate with `make assets`.
