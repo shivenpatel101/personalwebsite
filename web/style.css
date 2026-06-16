@@ -103,13 +103,13 @@ a:hover { color: var(--muted); }
   padding-left: 1rem;
 }
 .timeline-content .title a {
-  color: var(--accent);
+  color: var(--ink);
   text-decoration: none;
   font-weight: 500;
 }
-.timeline-content .title a:hover { color: var(--accent-hover); }
+.timeline-content .title a:hover { color: var(--muted); }
 .timeline-content .upcoming {
-  color: var(--accent);
+  color: var(--muted);
   font-weight: 500;
 }
 .timeline-content .desc {
@@ -134,11 +134,11 @@ a:hover { color: var(--muted); }
   margin-top: .5rem;
 }
 .contact-icons a {
-  color: var(--ink);
+  color: var(--accent);
   display: inline-flex;
   text-decoration: none;
 }
-.contact-icons a:hover { color: var(--muted); }
+.contact-icons a:hover { color: var(--accent-hover); }
 .contact-icons svg { width: 1.2rem; height: 1.2rem; display: block; }
 
 @font-face {
