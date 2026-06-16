@@ -148,11 +148,29 @@
     }
 
     function skipIntro() {
-      intro.remove();
+      intro.classList.add("hidden");
       skip.classList.add("hidden");
       logo.classList.add("show", "corner");
       page.classList.add("show");
     }
+
+    function replayIntro() {
+      done = false;
+      sessionStorage.removeItem("introPlayed");
+      logo.classList.remove("show", "corner");
+      page.classList.remove("show");
+      intro.classList.remove("hidden");
+      skip.classList.remove("hidden");
+      vid.currentTime = 0;
+      vid.play().catch(() => finish());
+      markPlayed();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    logo.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (logo.classList.contains("corner")) replayIntro();
+    });
 
     if (!shouldPlay()) {
       skipIntro();

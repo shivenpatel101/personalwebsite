@@ -184,6 +184,7 @@ a:hover { color: var(--accent-hover); }
 #logo.corner {
   left: 1.5rem; top: 1rem;
   transform: translate(0, 0) scale(.30);
+  cursor: pointer;
 }
 
 #page { opacity: 0; transition: opacity .7s ease .15s; }
