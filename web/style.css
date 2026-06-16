@@ -3,9 +3,7 @@
   --muted: #7a7876;
   --accent: #3A8FB5;       /* epicycle blue from the intro */
   --accent-hover: #2b6f90;
-  --accent-soft: #eaf3f8;
   --border: #e8e6e4;
-  --border-accent: rgba(58, 143, 181, 0.35);
 }
 
 * { box-sizing: border-box; }
@@ -37,12 +35,12 @@ nav a:hover { color: var(--accent); }
 
 hr {
   border: none;
-  border-top: 1px solid var(--border-accent);
+  border-top: 1px solid var(--border);
   margin: 1.5rem 0;
 }
 
 p { margin: 0 0 1rem; }
-strong { font-weight: 600; color: var(--accent); }
+strong { font-weight: 600; }
 
 h1 {
   font-size: 1.35rem;
@@ -55,7 +53,6 @@ h2 {
   font-size: 1.05rem;
   font-weight: 600;
   margin: 0 0 1rem;
-  color: var(--accent);
 }
 
 a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
@@ -82,7 +79,7 @@ a:hover { color: var(--accent-hover); }
 .timeline-item:last-child { margin-bottom: 0; }
 .timeline-date {
   font-size: .62rem;
-  color: var(--accent);
+  color: var(--muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   writing-mode: vertical-rl;
@@ -91,22 +88,20 @@ a:hover { color: var(--accent-hover); }
   align-self: start;
   margin-top: .2rem;
   white-space: nowrap;
-  opacity: 0.85;
 }
 .timeline-content {
   border-left: 2px solid var(--accent);
   padding-left: 1rem;
 }
 .timeline-content .title a {
-  color: var(--ink);
-  text-decoration: none;
-  font-weight: 600;
-}
-.timeline-content .title a:hover { color: var(--accent); }
-.timeline-content .upcoming {
   color: var(--accent);
-  font-weight: 600;
-  opacity: 0.75;
+  text-decoration: none;
+  font-weight: 500;
+}
+.timeline-content .title a:hover { color: var(--accent-hover); }
+.timeline-content .upcoming {
+  color: var(--muted);
+  font-weight: 500;
 }
 .timeline-content .desc {
   color: var(--muted);
@@ -114,7 +109,7 @@ a:hover { color: var(--accent-hover); }
   margin-top: .15rem;
 }
 
-.about-label { color: var(--accent); font-weight: 500; }
+.about-label { color: var(--muted); }
 
 .placeholder { color: var(--muted); font-style: italic; }
 
@@ -179,7 +174,7 @@ a:hover { color: var(--accent-hover); }
   text-decoration: none; opacity: 0;
   transition: opacity .5s ease, transform .85s cubic-bezier(.22,.61,.36,1);
 }
-#logo .last { color: var(--accent); opacity: 0.65; }
+#logo .last { color: var(--muted); }
 #logo.show { opacity: 1; }
 #logo.corner {
   left: 1.5rem; top: 1rem;
