@@ -6,30 +6,33 @@
 <title>Shiven Patel</title>
 <link rel="icon" href="data:,">
 
+<!-- Serif typeface, matching the inspiration site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+
 <!-- Preload the intro video so it's ready before first paint -->
 <link rel="preload" as="video" href="assets/intro.mp4" type="video/mp4">
 
 <style>
   :root {
-    --ink: #141414;
-    --gray: #8A8A8A;
-    --line: #e3ecf2;
-    --accent: #3A8FB5;        /* epicycle blue */
-    --accent-deep: #2b6f90;
-    --accent-soft: #eaf3f8;
+    --ink: #232221;          /* near-black text */
+    --muted: #7a7876;        /* secondary text */
+    --accent: #3A8FB5;       /* epicycle blue */
+    --accent-hover: #2b6f90;
   }
 
   * { box-sizing: border-box; }
+  html { font-size: 20px; }
   html, body { margin: 0; height: 100%; }
   body {
-    background:
-      radial-gradient(1100px 620px at 50% -10%, rgba(58,143,181,0.14), rgba(58,143,181,0) 70%),
-      radial-gradient(900px 500px at 100% 110%, rgba(58,143,181,0.10), rgba(58,143,181,0) 70%),
-      #ffffff;
-    background-attachment: fixed;
+    background: #fff;
     color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: Newsreader, Georgia, serif;
+    font-weight: 400;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   @font-face {
@@ -58,7 +61,7 @@
     text-decoration: none; opacity: 0;
     transition: opacity .5s ease, transform .85s cubic-bezier(.22,.61,.36,1);
   }
-  #logo .last { color: var(--gray); }
+  #logo .last { color: var(--muted); }
   #logo.show { opacity: 1; }
   #logo.corner {
     left: 1.5rem; top: 1.0rem;
@@ -69,52 +72,31 @@
   #page { opacity: 0; transition: opacity .7s ease .15s; }
   #page.show { opacity: 1; }
 
-  /* thin blue accent line across the very top */
-  body::before {
-    content: ""; position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 120;
-    background: linear-gradient(90deg, var(--accent), var(--accent-deep));
-  }
-
-  header {
-    position: fixed; top: 0; right: 0; left: 0; z-index: 90;
-    display: flex; justify-content: flex-end; align-items: center;
-    gap: 1.75rem; padding: 1.5rem 2rem;
-  }
-  nav a {
-    color: var(--ink); text-decoration: none; font-size: .95rem; letter-spacing: .02em;
-    opacity: .7; transition: color .2s, opacity .2s;
-  }
-  nav a:hover { opacity: 1; color: var(--accent); }
-
   main {
-    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-    max-width: 820px; margin: 0 auto; padding: 0 2rem;
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 4rem;
   }
-  .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 600; letter-spacing: -0.02em;
-    margin: 0 0 1rem;
+  h1 {
+    font-size: 1.9rem; font-weight: 600; letter-spacing: -0.01em;
+    margin: 0 0 1.25rem;
   }
-  .hero h1 .name {
-    color: var(--accent);
-    background: linear-gradient(90deg, var(--accent), var(--accent-deep));
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  p { margin: 0 0 1.1rem; }
+  .muted { color: var(--muted); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--accent-hover); }
+
+  /* ---------- Contact icons (no buttons) ---------- */
+  .contact {
+    display: flex; gap: 1.25rem; align-items: center;
+    margin-top: 1.75rem;
   }
-  .hero p {
-    font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--gray);
-    line-height: 1.6; margin: 0 0 2rem; max-width: 40ch;
+  .contact a {
+    color: var(--ink); display: inline-flex; text-decoration: none;
+    transition: color .15s ease;
   }
-  .links { display: flex; flex-wrap: wrap; gap: 1rem; }
-  .links a {
-    color: var(--accent-deep); text-decoration: none; font-size: .98rem; font-weight: 500;
-    padding: .6rem 1.15rem; border: 1px solid var(--accent); border-radius: 999px;
-    background: var(--accent-soft);
-    transition: background .2s, color .2s, transform .15s, box-shadow .2s;
-  }
-  .links a:hover {
-    background: var(--accent); color: #fff;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(58,143,181,0.30);
-  }
+  .contact a:hover { color: var(--accent); }
+  .contact svg { width: 1.35rem; height: 1.35rem; display: block; }
 
   @media (prefers-reduced-motion: reduce) {
     #intro { display: none; }
@@ -138,26 +120,29 @@
 
   <!-- The real homepage, revealed after the intro -->
   <div id="page">
-    <header>
-      <nav>
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <!-- TODO: replace with your email -->
-        <a href="mailto:you@example.com">Contact</a>
-      </nav>
-    </header>
-
     <main>
-      <section class="hero">
-        <h1>Hi, I'm <span class="name">Shiven</span>.</h1>
-        <p>Short tagline goes here — what you build, study, or care about.</p>
-        <div class="links">
-          <!-- TODO: replace these with your real links -->
-          <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="mailto:you@example.com">Email</a>
-        </div>
-      </section>
+      <h1>Shiven Patel</h1>
+      <!-- TODO: edit these two lines to say what you actually do. -->
+      <p>I'm a student at UCLA.</p>
+      <p class="muted">I like building things for the web and exploring math through animation.</p>
+
+      <nav class="contact">
+        <a href="https://github.com/shivenpatel101" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/shiven-patel101/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+          </svg>
+        </a>
+        <a href="mailto:shivenpatel06@ucla.edu" aria-label="Email" title="shivenpatel06@ucla.edu">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </a>
+      </nav>
     </main>
   </div>
 
