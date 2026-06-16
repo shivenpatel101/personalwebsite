@@ -63,8 +63,44 @@ a:hover { color: var(--accent-hover); }
 .entries .title a { color: var(--ink); text-decoration: none; font-weight: 500; }
 .entries .title a:hover { color: var(--accent); }
 .entries .upcoming { color: var(--muted); font-weight: 500; }
-.entries .meta { color: var(--muted); }
 .entries .desc { color: var(--muted); font-size: .95rem; margin-top: .15rem; }
+
+.timeline { list-style: none; padding: 0; margin: 0; }
+.timeline-item {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  column-gap: .5rem;
+  margin-bottom: 1.5rem;
+}
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-date {
+  font-size: .62rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  justify-self: center;
+  align-self: start;
+  margin-top: .2rem;
+  white-space: nowrap;
+}
+.timeline-content {
+  border-left: 1px solid var(--border);
+  padding-left: 1rem;
+}
+.timeline-content .title a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.timeline-content .title a:hover { color: var(--accent); }
+.timeline-content .upcoming { color: var(--muted); font-weight: 500; }
+.timeline-content .desc {
+  color: var(--muted);
+  font-size: .95rem;
+  margin-top: .15rem;
+}
 
 .about-label { color: var(--muted); }
 
