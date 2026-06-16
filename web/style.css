@@ -62,8 +62,11 @@ a:hover { color: var(--accent-hover); }
 .entries li { margin-bottom: 1rem; }
 .entries .title a { color: var(--ink); text-decoration: none; font-weight: 500; }
 .entries .title a:hover { color: var(--accent); }
+.entries .upcoming { color: var(--muted); font-weight: 500; }
 .entries .meta { color: var(--muted); }
 .entries .desc { color: var(--muted); font-size: .95rem; margin-top: .15rem; }
+
+.about-label { color: var(--muted); }
 
 .placeholder { color: var(--muted); font-style: italic; }
 
