@@ -88,7 +88,7 @@ a:hover { color: var(--muted); }
 .timeline-item:last-child { margin-bottom: 0; }
 .timeline-date {
   font-size: .62rem;
-  color: var(--muted);
+  color: var(--accent);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   writing-mode: vertical-rl;
@@ -99,17 +99,17 @@ a:hover { color: var(--muted); }
   white-space: nowrap;
 }
 .timeline-content {
-  border-left: 2px solid var(--border);
+  border-left: 2px solid var(--accent);
   padding-left: 1rem;
 }
 .timeline-content .title a {
-  color: var(--ink);
+  color: var(--accent);
   text-decoration: none;
   font-weight: 500;
 }
-.timeline-content .title a:hover { color: var(--muted); }
+.timeline-content .title a:hover { color: var(--accent-hover); }
 .timeline-content .upcoming {
-  color: var(--muted);
+  color: var(--accent);
   font-weight: 500;
 }
 .timeline-content .desc {
