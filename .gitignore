@@ -17,10 +17,10 @@ media/
 .fontconfig/
 
 # Intermediate optimized artifacts (regenerate with `make`)
-/intro.mp4
-/intro.webm
-/intro-poster.png
-/FullName_FFTReveal.mp4
+render/intro.mp4
+render/intro.webm
+render/intro-poster.png
+render/*.mp4
 
 # NOTE: web/assets/intro.* and the poster ARE committed on purpose —
 # GitHub Pages serves them directly. Regenerate with `make assets`.

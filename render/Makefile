@@ -1,10 +1,11 @@
 # One-command pipeline: Docker render -> ffmpeg optimize -> web assets.
+# Run from this directory (render/):
 #
 #   make            # build image, render, optimize, copy web assets
 #   make image      # build the Docker image (font baked in)
 #   make render     # render the scene at 1080p60 via Docker
 #   make optimize   # produce web-ready mp4 / webm / poster
-#   make assets     # copy optimized files into web/assets/
+#   make assets     # copy optimized files into ../web/assets/
 #   make clean      # remove generated media + optimized files
 
 IMAGE       := name-intro
@@ -12,11 +13,12 @@ SCRIPT      := TwoLetters.py
 SCENE       := FullName_FFTReveal
 QUALITY     := -qh
 RENDER_OUT  := media/videos/TwoLetters/1080p60/$(SCENE).mp4
+WEB_ASSETS  := ../web/assets
 
 .PHONY: all image render optimize assets clean
 
 all: image render optimize assets
-	@echo "Done. Web assets are in web/assets/"
+	@echo "Done. Web assets are in $(WEB_ASSETS)/"
 
 image:
 	docker build -t $(IMAGE) .
@@ -34,9 +36,10 @@ optimize: $(RENDER_OUT)
 	ffmpeg -y -i intro.mp4 -frames:v 1 intro-poster.png
 
 assets: optimize
-	mkdir -p web/assets
-	cp intro.mp4 intro.webm intro-poster.png web/assets/
-	cp fonts/GreatVibes-Regular.ttf web/assets/
+	mkdir -p $(WEB_ASSETS)
+	cp intro.mp4 intro.webm intro-poster.png $(WEB_ASSETS)/
+	cp fonts/GreatVibes-Regular.ttf $(WEB_ASSETS)/
 
 clean:
-	rm -rf media intro.mp4 intro.webm intro-poster.png web/assets/*.mp4 web/assets/*.webm web/assets/*.png
+	rm -rf media intro.mp4 intro.webm intro-poster.png \
+		$(WEB_ASSETS)/*.mp4 $(WEB_ASSETS)/*.webm $(WEB_ASSETS)/*.png
