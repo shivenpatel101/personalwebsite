@@ -119,13 +119,15 @@
       done = true;
       vid.pause();
       skip.classList.add("hidden");
+      markPlayed();
       intro.classList.add("hidden");
       dockAndReveal();
     }
 
     function shouldPlay() {
+      if (sessionStorage.getItem("introPlayed")) return false;
       if (PLAY_FREQUENCY === "always") return true;
-      if (PLAY_FREQUENCY === "session") return !sessionStorage.getItem("introPlayed");
+      if (PLAY_FREQUENCY === "session") return true;
       if (PLAY_FREQUENCY === "daily") {
         const last = Number(localStorage.getItem("introPlayedAt") || 0);
         return Date.now() - last > 24 * 60 * 60 * 1000;
@@ -134,14 +136,19 @@
     }
 
     function markPlayed() {
-      if (PLAY_FREQUENCY === "session") sessionStorage.setItem("introPlayed", "1");
+      sessionStorage.setItem("introPlayed", "1");
       if (PLAY_FREQUENCY === "daily") localStorage.setItem("introPlayedAt", String(Date.now()));
     }
 
-    if (!shouldPlay()) {
+    function skipIntro() {
       intro.remove();
+      skip.classList.add("hidden");
       logo.classList.add("show", "corner");
       page.classList.add("show");
+    }
+
+    if (!shouldPlay()) {
+      skipIntro();
     } else {
       skip.classList.remove("hidden");
       skip.addEventListener("click", finish);
