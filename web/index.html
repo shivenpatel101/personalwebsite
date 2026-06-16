@@ -19,6 +19,7 @@
       <source src="assets/intro.mp4"  type="video/mp4">
     </video>
   </div>
+  <button type="button" id="skipIntro" class="hidden">skip</button>
 
   <a id="logo" href=".">Shiven <span class="last">Patel</span></a>
 
@@ -88,8 +89,10 @@
     const PLAY_FREQUENCY = "always";
     const intro = document.getElementById("intro");
     const vid = document.getElementById("introVid");
+    const skip = document.getElementById("skipIntro");
     const logo = document.getElementById("logo");
     const page = document.getElementById("page");
+    let done = false;
 
     function dockAndReveal() {
       logo.classList.add("show");
@@ -98,6 +101,10 @@
     }
 
     function finish() {
+      if (done) return;
+      done = true;
+      vid.pause();
+      skip.classList.add("hidden");
       intro.classList.add("hidden");
       dockAndReveal();
     }
@@ -122,6 +129,8 @@
       logo.classList.add("show", "corner");
       page.classList.add("show");
     } else {
+      skip.classList.remove("hidden");
+      skip.addEventListener("click", finish);
       vid.addEventListener("ended", finish);
       vid.addEventListener("error", finish);
       vid.play().catch(() => finish());
