@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shiven Patel</title>
+<link rel="icon" href="data:,">
+
+<!-- Serif typeface, matching the inspiration site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+
+<!-- Preload the intro video so it's ready before first paint -->
+<link rel="preload" as="video" href="assets/intro.mp4" type="video/mp4">
+
+<style>
+  :root {
+    --ink: #232221;          /* near-black text */
+    --muted: #7a7876;        /* secondary text */
+    --accent: #3A8FB5;       /* epicycle blue */
+    --accent-hover: #2b6f90;
+  }
+
+  * { box-sizing: border-box; }
+  html { font-size: 20px; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: #fff;
+    color: var(--ink);
+    font-family: Newsreader, Georgia, serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  @font-face {
+    font-family: "Script";
+    src: url("assets/GreatVibes-Regular.ttf") format("truetype");
+    font-display: swap;
+  }
+
+  /* ---------- Intro overlay ---------- */
+  #intro {
+    position: fixed; inset: 0; z-index: 100; background: #fff;
+    display: grid; place-items: center;
+    transition: opacity .6s ease;
+  }
+  #intro.hidden { opacity: 0; pointer-events: none; }
+  #introVid { max-width: 100%; max-height: 100%; display: block; }
+
+  /* ---------- Brand wordmark (docks to corner) ---------- */
+  #logo {
+    position: fixed; left: 50%; top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: left top;
+    z-index: 110;
+    font-family: "Script", cursive; color: var(--ink);
+    font-size: clamp(2.5rem, 9vw, 7rem); line-height: 1; white-space: nowrap;
+    text-decoration: none; opacity: 0;
+    transition: opacity .5s ease, transform .85s cubic-bezier(.22,.61,.36,1);
+  }
+  #logo .last { color: var(--muted); }
+  #logo.show { opacity: 1; }
+  #logo.corner {
+    left: 1.5rem; top: 1.0rem;
+    transform: translate(0, 0) scale(.30);
+  }
+
+  /* ---------- Page ---------- */
+  #page { opacity: 0; transition: opacity .7s ease .15s; }
+  #page.show { opacity: 1; }
+
+  main {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 4rem;
+  }
+  h1 {
+    font-size: 1.9rem; font-weight: 600; letter-spacing: -0.01em;
+    margin: 0 0 1.25rem;
+  }
+  p { margin: 0 0 1.1rem; }
+  .muted { color: var(--muted); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--accent-hover); }
+
+  /* ---------- Contact icons (no buttons) ---------- */
+  .contact {
+    display: flex; gap: 1.25rem; align-items: center;
+    margin-top: 1.75rem;
+  }
+  .contact a {
+    color: var(--ink); display: inline-flex; text-decoration: none;
+    transition: color .15s ease;
+  }
+  .contact a:hover { color: var(--accent); }
+  .contact svg { width: 1.35rem; height: 1.35rem; display: block; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #intro { display: none; }
+    #logo { opacity: 1; left: 1.5rem; top: 1rem; transform: scale(.30); transition: none; }
+    #page { opacity: 1; transition: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- Intro overlay (plays, then fades and hands off to the corner wordmark) -->
+  <div id="intro">
+    <video id="introVid" autoplay muted playsinline preload="auto"
+           poster="assets/intro-poster.png">
+      <source src="assets/intro.webm" type="video/webm">
+      <source src="assets/intro.mp4"  type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Persistent brand wordmark; links home -->
+  <a id="logo" href=".">Shiven <span class="last">Patel</span></a>
+
+  <!-- The real homepage, revealed after the intro -->
+  <div id="page">
+    <main>
+      <h1>Shiven Patel</h1>
+      <!-- TODO: edit these two lines to say what you actually do. -->
+      <p>I'm a student at UCLA.</p>
+      <p class="muted">I like building things for the web and exploring math through animation.</p>
+
+      <nav class="contact">
+        <a href="https://github.com/shivenpatel101" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/shiven-patel101/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+          </svg>
+        </a>
+        <a href="mailto:shivenpatel06@ucla.edu" aria-label="Email" title="shivenpatel06@ucla.edu">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <script>
+    // How often the intro plays:
+    //   "always"  -> every page load (current setting)
+    //   "session" -> once per browser tab/session
+    //   "daily"   -> once per 24h
+    const PLAY_FREQUENCY = "always";
+
+    const intro = document.getElementById("intro");
+    const vid = document.getElementById("introVid");
+    const logo = document.getElementById("logo");
+    const page = document.getElementById("page");
+
+    function dockAndReveal() {
+      logo.classList.add("show");
+      requestAnimationFrame(() => logo.classList.add("corner"));
+      page.classList.add("show");
+    }
+
+    function finish() {
+      intro.classList.add("hidden");
+      dockAndReveal();
+    }
+
+    function shouldPlay() {
+      if (PLAY_FREQUENCY === "always") return true;
+      if (PLAY_FREQUENCY === "session") return !sessionStorage.getItem("introPlayed");
+      if (PLAY_FREQUENCY === "daily") {
+        const last = Number(localStorage.getItem("introPlayedAt") || 0);
+        return Date.now() - last > 24 * 60 * 60 * 1000;
+      }
+      return true;
+    }
+
+    function markPlayed() {
+      if (PLAY_FREQUENCY === "session") sessionStorage.setItem("introPlayed", "1");
+      if (PLAY_FREQUENCY === "daily") localStorage.setItem("introPlayedAt", String(Date.now()));
+    }
+
+    if (!shouldPlay()) {
+      intro.remove();
+      logo.classList.add("show", "corner");
+      page.classList.add("show");
+    } else {
+      vid.addEventListener("ended", finish);
+      // Safety: if the video stalls or 'ended' never fires, hand off anyway.
+      vid.addEventListener("error", finish);
+      vid.play().catch(() => finish()); // autoplay blocked -> reveal page immediately
+      markPlayed();
+    }
+  </script>
+</body>
+</html>
