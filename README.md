@@ -35,8 +35,26 @@ make            # build image, render at 1080p60, optimize, copy to ../web/asset
 Then commit the updated files in `web/assets/` and push — GitHub Pages
 redeploys automatically.
 
-## Deploy
+## Deploy (live site)
 
-In the GitHub repo: **Settings → Pages → Source → "GitHub Actions"**. Each push
-to `main` publishes `web/`. The intro plays on every visit (client-side); adjust
-`PLAY_FREQUENCY` in `web/index.html` to change that.
+One-time setup in GitHub:
+
+1. Open https://github.com/shivenpatel101/personalwebsite/settings/pages
+2. Under **Build and deployment → Source**, choose **GitHub Actions**
+3. Go to **Actions** → **Deploy site to GitHub Pages** → **Run workflow**
+
+After the workflow finishes (about 1 minute), the site is live at:
+
+**https://shivenpatel101.github.io/personalwebsite/**
+
+Every push to `main` redeploys automatically. The intro plays on every visit
+(client-side); adjust `PLAY_FREQUENCY` in `web/index.html` to change that.
+
+## Run locally
+
+```bash
+cd web
+python3 -m http.server 8000
+```
+
+Open http://localhost:8000
