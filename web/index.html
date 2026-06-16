@@ -108,6 +108,7 @@
 
   <script>
     const PLAY_FREQUENCY = "always";
+    const INTRO_PLAYBACK_RATE = 1.12;
     const intro = document.getElementById("intro");
     const vid = document.getElementById("introVid");
     const skip = document.getElementById("skipIntro");
@@ -162,6 +163,7 @@
       intro.classList.remove("hidden");
       skip.classList.remove("hidden");
       vid.currentTime = 0;
+      vid.playbackRate = INTRO_PLAYBACK_RATE;
       vid.play().catch(() => finish());
       markPlayed();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -175,6 +177,7 @@
     if (!shouldPlay()) {
       skipIntro();
     } else {
+      vid.playbackRate = INTRO_PLAYBACK_RATE;
       skip.classList.remove("hidden");
       skip.addEventListener("click", finish);
       vid.addEventListener("ended", finish);
